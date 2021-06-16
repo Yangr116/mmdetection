@@ -223,7 +223,7 @@ class FCOSHead(AnchorFreeHead):
         # FG cat_id: [0, num_classes -1], BG cat_id: num_classes
         bg_class_ind = self.num_classes
         pos_inds = ((flatten_labels >= 0)
-                    & (flatten_labels < bg_class_ind)).nonzero().reshape(-1)
+                    & (flatten_labels < bg_class_ind)).nonzero(as_tuple=False).reshape(-1)
         num_pos = torch.tensor(
             len(pos_inds), dtype=torch.float, device=bbox_preds[0].device)
         num_pos = max(reduce_mean(num_pos), 1.0)
